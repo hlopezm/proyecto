@@ -1,0 +1,22 @@
+%table.table.table-hover
+  %thead
+    %tr
+      %th Cantidad
+      %th Proyecto
+      %th Precio
+
+  -@report.items.each do |item|
+    %tr
+      %td=item.quantity
+      %td
+        =image_tag item.project.image.thumb
+        =link_to item.project.name, item.project
+      %td.text-right=number_to_currency item.total_price
+  %tfoot
+    %tr
+      %td.text-right(colspan=3)
+        %strong
+          Total:
+          =number_to_currency @report.total_price
+
+%p=link_to "Checkout", checkout_report_path, class: "btn btn-primary"

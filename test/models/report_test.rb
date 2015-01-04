@@ -25,11 +25,18 @@ class ReportTest < MiniTest::Test
     assert_kind_of Project, report.items.first.project
   end
 
+
+  def test_builds_from_hash
+    report = Report.build_from_hash session_hash
+
+    assert_equal 1, report.items.first.project_id
+  end
+
   def test_serializes_to_hash
     report = Report.new
     report.add_item 1
 
-    assert_equal report.serialize, session_hash
+    assert_equal report.serialize, session_hash["report"]
   end
 
   private

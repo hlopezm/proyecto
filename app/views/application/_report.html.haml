@@ -1,0 +1,7 @@
+-if @report
+  %p.navbar-text.navbar-right
+    -if @report.empty?
+      Tu reporte esta vacio.
+    -else
+      =link_to "Tu reporte tiene #{pluralize @report.count, "item"}.", report_path
+

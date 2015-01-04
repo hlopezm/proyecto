@@ -13,4 +13,8 @@ class ReportItem
   def project
     Project.find project_id
   end
+
+  def total_price
+    project.price * quantity
+  end
 end
