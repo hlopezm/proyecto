@@ -3,8 +3,11 @@
 %p= number_to_currency @project.price
 %p= image_tag @project.image, height: "300"
 %p= @project.category.name
+%p= @project.portfolio.name
 
 %p= link_to "agregar a reporte", add_report_path, method: :post,  class: "btn btn-primary"
-= link_to 'Edit', edit_project_path(@project)
-\|
-= link_to 'Back', projects_path
+
+%p
+  = link_to 'Edit', edit_project_path(@project)
+  \|
+  = link_to 'Back', projects_path

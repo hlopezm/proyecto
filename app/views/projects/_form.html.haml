@@ -16,7 +16,10 @@
     = f.label :image
     = f.file_field :image
   .field
-    = f.label :category
+    = f.label :Zona
     = f.select :category_id, Category.all.map { |c| [c.name, c.id ] }
+  .field
+    = f.label :portfolio
+    = f.select :portfolio_id, Portfolio.all.map { |p| [p.name, p.id ] }
   .actions
     = f.submit 'Save'

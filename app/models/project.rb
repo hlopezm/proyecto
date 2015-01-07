@@ -5,4 +5,5 @@ class Project < ActiveRecord::Base
   validates_numericality_of :price
   
   belongs_to :category
+  belongs_to :portfolio
 end

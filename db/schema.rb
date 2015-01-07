@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150107043111) do
+ActiveRecord::Schema.define(version: 20150107205417) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -38,16 +38,26 @@ ActiveRecord::Schema.define(version: 20150107043111) do
 
   add_index "orders", ["user_id"], name: "index_orders_on_user_id"
 
+  create_table "portfolios", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string   "name"
     t.float    "price"
     t.string   "image"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.integer  "category_id", default: 1
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "category_id",  default: 1
+    t.integer  "year_id"
+    t.integer  "portfolio_id", default: 1
   end
 
   add_index "projects", ["category_id"], name: "index_projects_on_category_id"
+  add_index "projects", ["portfolio_id"], name: "index_projects_on_portfolio_id"
+  add_index "projects", ["year_id"], name: "index_projects_on_year_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
@@ -73,5 +83,11 @@ ActiveRecord::Schema.define(version: 20150107043111) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "years", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end
