@@ -43,11 +43,11 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp 
   config.action_mailer.smtp_settings = {
-    address: ENV["SMTP_ADDRESS"],
-    user_name: ENV["SMTP_USER"],
-    password: ENV["SMTP_PASSWORD"],
-    domain: "webdev.net",
-    autentication: "plain",
-    enable_starttls_auto: true
+    address: "smtp.gmail.com",
+    port: 587,
+    authentication: "plain",
+    enable_starttls_auto: true,
+    user_name: "hlopezm23@gmail.com",
+    password: "android2"
   }
 end
