@@ -1,0 +1,9 @@
+Saludos <%= @order.user.name %>,
+
+Este es tu reporte solicitado, con folio: #<%= order.id %>:
+
+<%- @order.items.each do |item| %>
+* <%= item.quantity %> <%= item.project.name %>  (<%= number_to_currency item.total_price %>)
+<%- end %>
+
+Total: <%= number_to_currency @order.total_price %>

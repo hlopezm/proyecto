@@ -1,0 +1,35 @@
+%h1 Reporte a enviar
+
+%h2 Estos son los proyectos solicitados:
+
+%ul
+  -@report.items.each do |item|
+    %li
+      %em=item.quantity
+      %em=item.project.name
+      =item.project.price
+
+%p
+  %strong
+    Total
+    =number_to_currency @report.total_price
+
+=form_for @order_form, url: orders_path do |f|
+  =render "orders/errors"
+  %h3 Datos personales
+  =f.fields_for :user, f.object.user do |u| 
+    .form-group
+      %p=u.text_field :name, placeholder: "Nombre", class: "form-control input-lg"
+      %p
+        =u.text_field :email, placeholder: "Correo", class: "form-control"
+        %span.help-block Esta información servirá en caso que requieras checar el estatus del reporte.
+    .form-group
+      .row
+        %p.col-md-6=u.text_field :address, placeholder: "Dirección", class: "form-control"
+        %p.col-md-6=u.text_field :postal_code, placeholder: "C.P.", class: "form-control"
+        %p.col-md-6=u.text_field :city, placeholder: "Ciudad", class: "form-control"
+      %p=u.country_select :country, { priority_countries: [ "MX", "ES", "US" ] }, { class: "form-control" }
+
+      %p=u.text_field :phone, class: "form-control", placeholder: "Tel."
+
+  %p=f.submit "Enviar Reporte", class: "btn btn-primary"
