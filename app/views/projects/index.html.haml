@@ -1,5 +1,6 @@
-%h1 Listado Proyectos
+%h1 Proyectos
 
 =render "projects/table", projects: @projects
 
-%p= link_to 'New Project', new_project_path, class: "btn btn-primary"
+-if current_user && current_user.admin?
+  %p= link_to 'New Project', new_project_path, class: "btn btn-primary"

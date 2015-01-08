@@ -16,4 +16,12 @@ class ApplicationController < ActionController::Base
   def find_portfolios
     @portfolios = Portfolio.all
   end
+
+  def authenticate_admin!
+    authenticate_user!
+
+    unless current_user.admin?
+      redirect_to root_path, alert: "No estas autorizado a realizar esta operación"
+    end
+  end
 end

@@ -1,6 +1,8 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   before_filter :initialize_report
+  before_action :authenticate_admin!, only: [ :new ,:edit, :update, :create, :destroy ] 
+
 
   respond_to :html
 
