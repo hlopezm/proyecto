@@ -1,17 +1,18 @@
-%table.table.table-striped.table-responsive.table-hover
-  %thead
-    %tr
-      %th Nombre
-      %th Costo
-      %th Imagen
-      %th
+-if user_signed_in?
+  %table.table.table-striped.table-responsive.table-hover
+    %thead
+      %tr
+        %th Nombre
+        %th Costo
+        %th Imagen
+        %th
 
-  - projects.each do |project|
-    %tr
-      %td= link_to project.name, project
-      %td= number_to_currency project.price
-      %td= image_tag project.image.thumb
-      %td
-        -if current_user && current_user.admin?
-          = link_to 'Edit', edit_project_path(project)
-          = link_to 'Destroy', project, :method => :delete, :data => { :confirm => 'Estas seguro?' }
+    - projects.each do |project|
+      %tr
+        %td= link_to project.name, project
+        %td= number_to_currency project.price
+        %td= image_tag project.image.thumb
+        %td
+          -if current_user && current_user.admin?
+            = link_to 'Edit', edit_project_path(project)
+            = link_to 'Destroy', project, :method => :delete, :data => { :confirm => 'Estas seguro?' }
