@@ -41,10 +41,6 @@ class ProjectsController < ApplicationController
     respond_with(@project)
   end
 
-  def self.search(search)
-    where("name ILIKE ?", "%#{search}%") 
-    #where("content ILIKE ?", "%#{search}%")
-  end
 
   private
     def set_project
