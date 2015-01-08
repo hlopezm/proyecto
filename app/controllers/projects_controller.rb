@@ -5,8 +5,12 @@ class ProjectsController < ApplicationController
   respond_to :html
 
   def index
-    @projects = Project.all
-    respond_with(@projects)
+    @q = params[:q]
+    if @q
+      @projects = Project.where("name like ?", "%#{@q}%")
+    else
+      @projects = Project.all
+    end
   end
 
   def show
@@ -35,6 +39,11 @@ class ProjectsController < ApplicationController
   def destroy
     @project.destroy
     respond_with(@project)
+  end
+
+  def self.search(search)
+    where("name ILIKE ?", "%#{search}%") 
+    #where("content ILIKE ?", "%#{search}%")
   end
 
   private
