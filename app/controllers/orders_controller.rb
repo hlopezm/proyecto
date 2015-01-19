@@ -1,6 +1,9 @@
 class OrdersController < ApplicationController
   before_filter :initialize_report
 
+  def index
+    @orders = Order(created_at: :desc).all
+  end
   def create
     @order_form = OrderForm.new(
       user: User.new(order_params[:user]),

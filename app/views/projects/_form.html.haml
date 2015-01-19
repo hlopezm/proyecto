@@ -1,25 +1,54 @@
 = form_for @project, multipart: true do |f|
   - if @project.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@project.errors.count, "error")} prohibited this project from being saved:"
+      %h2= "#{pluralize(@project.errors.count, "error")} prohibieron guardar este proyecto:"
       %ul
         - @project.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :price
-    = f.text_field :price
-  .field
-    = f.label :image
-    = f.file_field :image
-  .field
-    = f.label :Zona
-    = f.select :category_id, Category.all.map { |c| [c.name, c.id ] }
-  .field
-    = f.label :portfolio
-    = f.select :portfolio_id, Portfolio.all.map { |p| [p.name, p.id ] }
-  .actions
-    = f.submit 'Save'
+  .form-group
+    .field
+      = f.label :Nombre
+      = f.text_field :name, placeholder: "Nombre", class: "form-control input-lg"
+
+    .row
+      .form-group
+        %form.form-horizontal.col-md-9
+          .form-group.col-md-4
+            %label.col-md-4.control-label{:for => "cartera"} Cartera
+            .col-md-2
+              %p#cartera.form-control=f.select :portfolio_id, Portfolio.all.map { |p| [p.name, p.id ] }, class: "form-control"
+
+          .form-group.col-md-4
+            %label.col-md-4.control-label{:for => "zona"} Zona Metropolitana
+            .col-md-2
+              %p#zona.form-control=f.select :category_id, Category.all.map { |c| [c.name, c.id ] }, class: "form-control"
+
+    .field
+      =f.label :Ubicación
+      =f.text_field :location, placeholder: "Ubicación", class: "form-control input-lg"
+
+    .field
+      =f.label :Contratado
+      =f.text_field :price, placeholder: "Monto Contratado", class: "form-control input-lg"
+
+    .row
+      %h5.col-md-4=f.text_field :auth_number, placeholder: "Oficio de Aut.", label: "Oficio Autorización", class: "form-control input-lg"
+      %h5.col-md-4=f.text_field :requested_amount, placeholder: "Solicitado", class: "form-control input-lg"
+
+    .row
+      %h5.col-md-4=f.text_field :target_set, placeholder: "Meta Programada", label: "Meta Programada", class: "form-control input-lg"
+      .form-group
+        .form-group.col-md-4
+          %label.col-md-4.control-label{:for => "unidad"} Unidad de Medida
+          .col-md-2
+            %p#zona.form-control= f.select :unit_id, Unit.all.map { |u| [u.name, u.id ] }, class: "form-control input-lg "
+
+    .field
+      = f.label :imagen
+      = f.file_field :image
+
+    .actions
+      = f.submit 'Guardar', class: "btn btn-default btn-primary"
+
+

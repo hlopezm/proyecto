@@ -11,9 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150107205417) do
+ActiveRecord::Schema.define(version: 20150116055353) do
 
   create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "executors", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -32,8 +38,9 @@ ActiveRecord::Schema.define(version: 20150107205417) do
 
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "state",      default: "new"
   end
 
   add_index "orders", ["user_id"], name: "index_orders_on_user_id"
@@ -48,16 +55,43 @@ ActiveRecord::Schema.define(version: 20150107205417) do
     t.string   "name"
     t.float    "price"
     t.string   "image"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.integer  "category_id",  default: 1
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.integer  "category_id",           default: 1
     t.integer  "year_id"
-    t.integer  "portfolio_id", default: 1
+    t.integer  "portfolio_id",          default: 1
+    t.integer  "executor_id",           default: 1
+    t.integer  "unit_id",               default: 1
+    t.string   "location"
+    t.string   "auth_number"
+    t.string   "contract_number"
+    t.float    "requested_amount"
+    t.float    "authorized_amount"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.string   "contact"
+    t.string   "target_set"
+    t.float    "physical_progress"
+    t.float    "financial_progress"
+    t.string   "extension"
+    t.string   "contract_modification"
+    t.datetime "delivery_date"
+    t.string   "status"
+    t.string   "observations"
   end
 
   add_index "projects", ["category_id"], name: "index_projects_on_category_id"
+  add_index "projects", ["executor_id"], name: "index_projects_on_executor_id"
   add_index "projects", ["portfolio_id"], name: "index_projects_on_portfolio_id"
+  add_index "projects", ["unit_id"], name: "index_projects_on_unit_id"
   add_index "projects", ["year_id"], name: "index_projects_on_year_id"
+
+  create_table "units", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "quantity"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false

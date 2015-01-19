@@ -1,13 +1,34 @@
+%p#notice= notice
+
 %h1= @project.name
-
-%p= number_to_currency @project.price
+%p
+  %b Cartera:
+  = @project.portfolio.name
+%p
+  %b Zona Metropolitana:
+  = @project.category.name
+%p
+  %b Ubicación:
+  = @project.location
+%p
+  %b Monto Contratado:
+  = number_to_currency @project.price
 %p= image_tag @project.image, height: "300"
-%p= @project.category.name
-%p= @project.portfolio.name
+%p
+  %b Instancia Ejecutora:
+  = @project.executor.name
+%p
+  %b No. Oficio de Autorización:
+  = @project.auth_number
+%p
+  %b Meta Programada:
+  = @project.target_set 
+  \|
+  = @project.unit.name
 
-%p= link_to "agregar a reporte", add_report_path, method: :post,  class: "btn btn-primary"
+-#%p= link_to "agregar a reporte", add_report_path, method: :post,  class: "btn btn-primary"
 
 %p
-  = link_to 'Edit', edit_project_path(@project)
+  = link_to 'Edit', edit_project_path(@project), class: "btn btn-primary"
   \|
-  = link_to 'Back', projects_path
+  = link_to 'Back', projects_path, class: "btn btn-primary"

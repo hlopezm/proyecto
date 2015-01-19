@@ -1,0 +1,21 @@
+%h1 Listing executors
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th
+      %th
+      %th
+      
+  %tbody
+    - @executors.each do |executor|
+      %tr
+        %td= executor.name
+        %td= link_to 'Show', executor
+        %td= link_to 'Edit', edit_executor_path(executor)
+        %td= link_to 'Destroy', executor, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Executor', new_executor_path

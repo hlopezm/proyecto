@@ -1,0 +1,36 @@
+%h1 Todos los reportes
+
+%table.table.table-hover
+  %thead
+    %tr
+      %th ID
+      %th Projects
+      %th Total
+      %th User
+      %th Date
+      %th
+
+  - @orders.each do |order|
+    %tr
+      %td= order.id
+      %td
+        %ul
+          -order.order_items.each do |item|
+            %li
+              =item.quantity
+              =item.project.name
+      %td= number_to_currency order.total_price
+      %td
+        %address
+          %strong= order.user.name
+          %br
+          =simple_format order.user.full_address
+
+      %td
+        %p=time_ago_in_words order.created_at
+        %p.text-muted=order.created_at.strftime "%b %d, %Y - %H:%M"
+      %td
+        =order.state
+
+
+

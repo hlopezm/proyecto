@@ -24,4 +24,5 @@ class ApplicationController < ActionController::Base
       redirect_to root_path, alert: "No estas autorizado a realizar esta operación"
     end
   end
+
 end

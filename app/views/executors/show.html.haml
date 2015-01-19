@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @executor.name
+
+= link_to 'Edit', edit_executor_path(@executor)
+\|
+= link_to 'Back', executors_path

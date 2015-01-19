@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
+  resources :units
+
+  resources :executors
+
   resources :portfolios
 
   resources :categories
 
-  devise_for :users
+  devise_for :users, :path => '', :path_names => {:sign_in => 'login', :sign_out => 'logout'}
+
   resources :projects
 
   resource :report, only: [ :show ]  do
