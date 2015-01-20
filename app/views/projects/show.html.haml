@@ -17,6 +17,7 @@
 %p
   %b Instancia Ejecutora:
   = @project.executor.name
+
 %p
   %b No. Oficio de Autorización:
   = @project.auth_number
@@ -29,6 +30,6 @@
 -#%p= link_to "agregar a reporte", add_report_path, method: :post,  class: "btn btn-primary"
 
 %p
-  = link_to 'Edit', edit_project_path(@project), class: "btn btn-primary"
+  = link_to 'Edit', edit_project_path(@project), class: "btn btn-default"
   \|
-  = link_to 'Back', projects_path, class: "btn btn-primary"
+  = link_to 'Back', projects_path, class: "btn btn-default"

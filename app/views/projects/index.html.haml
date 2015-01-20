@@ -3,5 +3,6 @@
 =render "projects/table", projects: @projects
 
 -if current_user && current_user.admin?
-  %p= link_to 'New Project', new_project_path, class: "btn btn-primary"
-
+  =link_to new_project_path, class: "btn btn-default" do
+    %i.glyphicon.glyphicon-plus
+    Nuevo Proyecto

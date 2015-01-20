@@ -11,18 +11,14 @@
       = f.label :Nombre
       = f.text_field :name, placeholder: "Nombre", class: "form-control input-lg"
 
-    .row
-      .form-group
-        %form.form-horizontal.col-md-9
-          .form-group.col-md-4
-            %label.col-md-4.control-label{:for => "cartera"} Cartera
-            .col-md-2
-              %p#cartera.form-control=f.select :portfolio_id, Portfolio.all.map { |p| [p.name, p.id ] }, class: "form-control"
-
-          .form-group.col-md-4
-            %label.col-md-4.control-label{:for => "zona"} Zona Metropolitana
-            .col-md-2
-              %p#zona.form-control=f.select :category_id, Category.all.map { |c| [c.name, c.id ] }, class: "form-control"
+    .row.large-6.columns
+      %form.form-horizontal
+        .form-group.col-md-3
+          %label{:for => ""} Cartera
+          %p#cartera.form-control.input-lg=f.select :portfolio_id, Portfolio.all.map { |p| [p.name, p.id ] }, class: "form-control"
+        .form-group.col-md-3
+          %label{:for => ""} Zona Metropolitana
+          %p#zona.form-control.input-lg=f.select :category_id, Category.all.map { |c| [c.name, c.id ] }, class: "form-control"
 
     .field
       =f.label :Ubicación
@@ -32,23 +28,36 @@
       =f.label :Contratado
       =f.text_field :price, placeholder: "Monto Contratado", class: "form-control input-lg"
 
-    .row
-      %h5.col-md-4=f.text_field :auth_number, placeholder: "Oficio de Aut.", label: "Oficio Autorización", class: "form-control input-lg"
-      %h5.col-md-4=f.text_field :requested_amount, placeholder: "Solicitado", class: "form-control input-lg"
+    .row.large-6.columns
+      %form.form-horizontal
+      .form-group.col-md-3
+        %label{:for => ""} Fecha inicio:
+        =f.date_field :start_date
+
+      .form-group.col-md-3
+        %label{:for => ""} Fecha Fin:
+        =f.date_field :end_date
 
     .row
-      %h5.col-md-4=f.text_field :target_set, placeholder: "Meta Programada", label: "Meta Programada", class: "form-control input-lg"
-      .form-group
-        .form-group.col-md-4
-          %label.col-md-4.control-label{:for => "unidad"} Unidad de Medida
-          .col-md-2
-            %p#zona.form-control= f.select :unit_id, Unit.all.map { |u| [u.name, u.id ] }, class: "form-control input-lg "
+      %h5.col-md-3=f.text_field :auth_number, placeholder: "Oficio de Aut.", label: "Oficio Autorización", class: "form-control input-lg"
+      %h5.col-md-3=f.text_field :price, placeholder: "Solicitado", class: "form-control input-lg"
+
+    .row.large-6.columns
+      .form-group.col-md-3
+        %label{:for => ""} Meta Programada
+        =f.text_field :target_set, placeholder: "Meta Programada", class: "form-control input-lg"
+      .form-group.col-md-3
+        %label{:for => ""} Unidad de Medida
+        %p#unidad.form-control.input-lg=f.select :unit_id, Unit.all.map { |u| [u.name, u.id ] }, class: "form-control input-lg "
 
     .field
       = f.label :imagen
       = f.file_field :image
 
-    .actions
-      = f.submit 'Guardar', class: "btn btn-default btn-primary"
+  %button.btn.btn-default.btn-primary{:type => "submit"} Guardar
+
+
+
+
 
 
