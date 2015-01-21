@@ -1,5 +1,8 @@
-%h1 New project
+%ul.nav.nav-tabs{:role => "tablist"}
+  %li= link_to 'Listado Proyectos', projects_path
+  %li.active= link_to 'Nuevo Proyecto', new_project_path
 
+%h1 Nuevo Proyecto
 = render 'form'
+%button.btn.btn-default=link_to 'Cancelar', projects_path
 
-= link_to 'Back', projects_path

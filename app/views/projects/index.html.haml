@@ -1,8 +1,7 @@
-%h1 Proyectos
-
-=render "projects/table", projects: @projects
-
--if current_user && current_user.admin?
-  =link_to new_project_path, class: "btn btn-default" do
-    %i.glyphicon.glyphicon-plus
-    Nuevo Proyecto
+-if user_signed_in?
+  %ul.nav.nav-tabs{:role => "tablist"}
+    %li.active= link_to 'Listado de Proyectos', projects_path
+    -if current_user && current_user.admin?
+      %li= link_to 'Nuevo Proyecto', new_project_path
+      %h1 Proyectos
+      =render "projects/table", projects: @projects

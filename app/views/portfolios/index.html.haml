@@ -1,21 +1,22 @@
-%h1 Listing portfolios
+-if user_signed_in?
+  %h1 Listing portfolios
 
-%table
-  %thead
-    %tr
-      %th Name
-      %th
-      %th
-      %th
-      
-  %tbody
-    - @portfolios.each do |portfolio|
+  %table
+    %thead
       %tr
-        %td= portfolio.name
-        %td= link_to 'Show', portfolio
-        %td= link_to 'Edit', edit_portfolio_path(portfolio)
-        %td= link_to 'Destroy', portfolio, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %th Name
+        %th
+        %th
+        %th
+        
+    %tbody
+      - @portfolios.each do |portfolio|
+        %tr
+          %td= portfolio.name
+          %td= link_to 'Show', portfolio
+          %td= link_to 'Edit', edit_portfolio_path(portfolio)
+          %td= link_to 'Destroy', portfolio, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
-%br
+  %br
 
-= link_to 'New Portfolio', new_portfolio_path
+  = link_to 'New Portfolio', new_portfolio_path
