@@ -48,6 +48,6 @@ Rails.application.configure do
     authentication: "plain",
     enable_starttls_auto: true,
     user_name: "hlopezm23@gmail.com",
-    password: "android2"
+    password: ""
   }
 end

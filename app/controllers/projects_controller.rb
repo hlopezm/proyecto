@@ -3,7 +3,6 @@ class ProjectsController < ApplicationController
   before_filter :initialize_report
   before_action :authenticate_admin!, only: [ :new ,:edit, :update, :create, :destroy ] 
 
-
   respond_to :html
 
   def index

@@ -9,14 +9,13 @@
 </head>
 <body>
 
+  <%= render "nav" %>
+  <div class="container">
   <%= content_tag :div, notice, class: "bg-success" %>
   <%= content_tag :div, alert, class: "bg-alert" %>
 
-  <%= render "nav" %>
-  <div class="container">
-    <%= yield %>
+  <%= yield %>
   </div>
 
-  <%= render "layouts/user_widget" %>
 </body>
 </html>
