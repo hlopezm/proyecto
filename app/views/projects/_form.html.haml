@@ -2,11 +2,76 @@
   .panel.panel-default
     #headingOne.panel-heading{:role => "tab"}
       %h4.panel-title
-        %a.collapsed{"aria-controls" => "collapseOne", "aria-expanded" => "true", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapseOne"}
+        %a{"aria-controls" => "collapseOne", "aria-expanded" => "true", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapseOne"}
           Datos Básicos
     #collapseOne.panel-collapse.collapse.in{"aria-labelledby" => "headingOne", :role => "tabpanel"}
       .panel-body
+        = form_for @project, multipart: true do |f|
+          - if @project.errors.any?
+            #error_explanation
+              %h2= "#{pluralize(@project.errors.count, "error")} prohibieron guardar este proyecto:"
+              %ul
+                - @project.errors.full_messages.each do |msg|
+                  %li= msg
 
+          .form-group
+            .field
+              = f.label :Nombre
+              = f.text_field :name, placeholder: "Nombre", class: "form-control input-lg"
+
+            .row.large-12.columns
+              %form.form-horizontal
+                .form-group.col-md-4
+                  %label{:for => ""} Cartera
+                  %p#cartera.form-control.input-lg=f.select :portfolio_id, Portfolio.all.map { |p| [p.name, p.id ] }, class: "form-control"
+                .form-group.col-md-4
+                  %label{:for => ""} Zona Metropolitana
+                  %p#zona.form-control.input-lg=f.select :category_id, Category.all.map { |c| [c.name, c.id ] }, class: "form-control"
+                .field.col-md-4
+                  =f.label :Ubicación
+                  =f.text_field :location, placeholder: "Ubicación", class: "form-control input-lg"
+
+            .row.large-12.columns
+              .field.col-md-6
+                =f.label :Contratado
+                =f.text_field :price, placeholder: "Monto Contratado", class: "form-control input-lg"
+              .field.col-md-6
+                =f.label :Autorización
+                =f.text_field :auth_number, placeholder: "Oficio de Autorización", class: "form-control input-lg"
+
+            .row.large-6.columns
+              %form.form-horizontal
+              .form-group.col-md-3
+                %label{:for => ""} Fecha inicio:
+                =f.date_field :start_date
+
+              .form-group.col-md-3
+                %label{:for => ""} Fecha Fin:
+                =f.date_field :end_date
+
+            .row
+              %h5.col-md-3=f.text_field :auth_number, placeholder: "Oficio de Aut.", label: "Oficio Autorización", class: "form-control input-lg"
+              %h5.col-md-3=f.text_field :price, placeholder: "Solicitado", class: "form-control input-lg"
+
+            .row.large-6.columns
+              .form-group.col-md-3
+                %label{:for => ""} Meta Programada
+                =f.text_field :target_set, placeholder: "Meta Programada", class: "form-control input-lg"
+              .form-group.col-md-3
+                %label{:for => ""} Unidad de Medida
+                %p#unidad.form-control.input-lg=f.select :unit_id, Unit.all.map { |u| [u.name, u.id ] }, class: "form-control input-lg "
+
+            .field
+              = f.label :imagen
+              = f.file_field :image
+
+  .panel.panel-default
+    #headingTwo.panel-heading{:role => "tab"}
+      %h4.panel-title
+        %a.collapsed{"aria-controls" => "collapseTwo", "aria-expanded" => "false", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapseTwo"}
+          Datos Restantes
+    #collapseTwo.panel-collapse.collapse{"aria-labelledby" => "headingTwo", :role => "tabpanel"}
+      .panel-body
         = form_for @project, multipart: true do |f|
           - if @project.errors.any?
             #error_explanation
@@ -62,15 +127,5 @@
             .field
               = f.label :imagen
               = f.file_field :image
-
-
-  .panel.panel-default
-    #headingTwo.panel-heading{:role => "tab"}
-      %h4.panel-title
-        %a.collapsed{"aria-controls" => "collapseTwo", "aria-expanded" => "false", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapseTwo"}
-          Datos Restantes
-    #collapseTwo.panel-collapse.collapse{"aria-labelledby" => "headingTwo", :role => "tabpanel"}
-      .panel-body
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
 
 %button.btn.btn-primary{:type => "submit"} Guardar
