@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150116055353) do
+ActiveRecord::Schema.define(version: 20150124061640) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -58,7 +58,6 @@ ActiveRecord::Schema.define(version: 20150116055353) do
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
     t.integer  "category_id",           default: 1
-    t.integer  "year_id"
     t.integer  "portfolio_id",          default: 1
     t.integer  "executor_id",           default: 1
     t.integer  "unit_id",               default: 1
@@ -84,13 +83,11 @@ ActiveRecord::Schema.define(version: 20150116055353) do
   add_index "projects", ["executor_id"], name: "index_projects_on_executor_id"
   add_index "projects", ["portfolio_id"], name: "index_projects_on_portfolio_id"
   add_index "projects", ["unit_id"], name: "index_projects_on_unit_id"
-  add_index "projects", ["year_id"], name: "index_projects_on_year_id"
 
   create_table "units", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "quantity"
   end
 
   create_table "users", force: :cascade do |t|
@@ -104,24 +101,17 @@ ActiveRecord::Schema.define(version: 20150116055353) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.string   "name"
     t.string   "address"
     t.string   "phone"
-    t.string   "postal_code"
-    t.string   "country"
-    t.string   "city"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "admin",                  default: false
+    t.string   "name"
+    t.datetime "date_of_birth"
+    t.boolean  "is_female",              default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-
-  create_table "years", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
 end

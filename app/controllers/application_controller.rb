@@ -5,6 +5,14 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_user!
   before_action :find_categories
   before_action :find_portfolios
+  before_filter :configure_permitted_parameters, if: :devise_controller?  
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:name, :email, :password) }
+    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:name, :email, :password, :current_password, :is_female, :date_of_birth) }
+  end
 
   def initialize_report
     @report = Report.build_from_hash session

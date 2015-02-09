@@ -49,6 +49,7 @@
       <p class="navbar-text navbar-right">
         <% if user_signed_in? %>
           Registrado como <%= current_user.name %>
+          <%= link_to 'Edit Perfil',edit_user_registration_path %>
           <%= link_to "Logout", destroy_user_session_path, method: :delete %>
         <% else %>
           <%= link_to "Log in", new_user_session_path, class: "navbar-link" %>
