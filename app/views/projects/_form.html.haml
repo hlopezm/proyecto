@@ -37,6 +37,15 @@
               .field.col-md-6
                 =f.label :Contratado
                 =f.text_field :price, prepend: "$", append: ".00", placeholder: "Monto Contratado", class: "form-control input-lg"
+              .field.col-md-6
+                =f.label :Autorizado
+                =f.text_field :authorized_amount, prepend: "$", append: ".00", placeholder: "Monto Autorizado", class: "form-control input-lg"
+
+          .row.large-12.columns
+            %form.form-horizontal
+              .field.col-md-6
+                =f.label :Economía
+                =f.text_field :economy, prepend: "$", append: ".00", placeholder: "Economía", class: "form-control input-lg"
               .form-group.col-md-6
                 %label{:for => ""} Ejecutor
                 %p#cartera.form-control.input-lg=f.select :executor_id, Executor.all.map { |e| [e.name, e.id ] }, class: "form-control"
